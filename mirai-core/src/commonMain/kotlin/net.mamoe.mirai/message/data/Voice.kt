@@ -38,6 +38,7 @@ public class Voice @MiraiInternalAPI constructor(
     public override val fileName: String,
     public override val md5: ByteArray,
     public override val fileSize: Long,
+    public val codec: Int = 0,
     private val _url: String
 ) : PttMessage() {
 

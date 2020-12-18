@@ -16,6 +16,7 @@ import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.contact.Member
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.PttMessage
+import net.mamoe.mirai.message.data.Voice
 import net.mamoe.mirai.message.data.firstOrNull
 import net.mamoe.mirai.qqandroid.QQAndroidBot
 import net.mamoe.mirai.qqandroid.contact.GroupImpl
@@ -146,7 +147,14 @@ internal object MessageSvcPbSendMsg : OutgoingPacketFactory<MessageSvcPbSendMsg.
                                 boolValid = true,
                                 fileSize = fileSize.toInt(),
                                 fileType = 4,
-                                pbReserve = byteArrayOf(0)
+                                pbReserve = byteArrayOf(0),
+                                format = let {
+                                    if (it is Voice) {
+                                        it.codec
+                                    } else {
+                                        0
+                                    }
+                                }
                             )
                         }
                     )
