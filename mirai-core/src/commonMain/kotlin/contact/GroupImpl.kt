@@ -441,6 +441,9 @@ internal class GroupImpl(
                 else -> 0                               // use amr by default
             }
         }
+        bot.network.logger.info {
+            "Codec ID is: $codec"
+        }
         return bot.network.run {
             val response: PttStore.GroupPttUp.Response.RequireUpload =
                 PttStore.GroupPttUp(bot.client, bot.id, id, md5, content.size.toLong(), codec).sendAndExpect()
